@@ -1,0 +1,6 @@
+{
+  "name": "Koda",
+  "description": "Autonomous AI co-editor that transforms long-form video content into tightened horizontal masters, vertical tension reels, A/B thumbnails, and SEO asset bundles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

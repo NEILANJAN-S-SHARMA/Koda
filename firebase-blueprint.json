@@ -1,0 +1,144 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Private authenticated creator profile stored in Firestore without any password credentials (passwords remain hashed in Firebase Auth).",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Firebase Auth UID of the account owner."
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Creator display name."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 180,
+          "description": "Verified or registered account email."
+        },
+        "authProvider": {
+          "type": "string",
+          "enum": ["password", "google"],
+          "description": "Authentication provider used to sign in."
+        },
+        "lastVerifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when OTP two-step verification was completed."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when profile was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of the latest profile update."
+        }
+      },
+      "required": ["uid", "displayName", "email", "authProvider", "createdAt", "updatedAt"]
+    },
+    "StudioProject": {
+      "title": "StudioProject",
+      "description": "Owner-isolated Koda post-production project with media config, agent states, vertical reels, thumbnails, and platform SEO pack.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Unique project identifier."
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Firebase Auth UID of the project owner."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 180,
+          "description": "Project title displayed in Studio."
+        },
+        "createdAtLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "description": "Human-readable creation label."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "processing", "ready"],
+          "description": "Pipeline processing status."
+        },
+        "preset": {
+          "type": "string",
+          "enum": ["gaming", "podcast", "tech"],
+          "description": "Silence-trimming content preset."
+        },
+        "selectedThumbnailId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Selected winning thumbnail variant ID."
+        },
+        "selectedReelId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Last active vertical reel ID."
+        },
+        "projectData": {
+          "type": "object",
+          "description": "Native Firestore Map containing structured media, config, agents, transcript, silences, chapters, moments, reels, thumbnails, seo, and exportManifest."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when project was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when project was last updated."
+        }
+      },
+      "required": [
+        "id",
+        "ownerId",
+        "title",
+        "createdAtLabel",
+        "status",
+        "preset",
+        "selectedThumbnailId",
+        "selectedReelId",
+        "projectData",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Private creator profile document isolated strictly to the authenticated user matching userId."
+    },
+    "/users/{userId}/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/StudioProject" },
+      "description": "User-owned Koda Studio projects stored under their personal subcollection."
+    }
+  }
+}

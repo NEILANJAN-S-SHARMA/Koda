@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-canvas: #D4DAB4;
+  --color-surface: #C7CFA3;
+  --color-surface-deep: #2C3D2B;
+  --color-accent-sage: #789575;
+  --color-ink-primary: #192418;
+  --color-ink-muted: #3F523E;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  html,
+  body {
+    background-color: #D4DAB4;
+    color: #192418;
+    font-family: var(--font-sans);
+    overflow-x: clip;
+  }
+
+  /* Chromium / WebKit / Safari custom floating pill scrollbar */
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #C7CFA3;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #557053;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #3B5239;
+  }
+
+  *::-webkit-scrollbar-thumb:active {
+    background-color: #2C3D2B;
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: #C7CFA3;
+  }
+
+  /* Firefox fallback */
+  @supports not selector(::-webkit-scrollbar) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #557053 #C7CFA3;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.sage-hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(63, 82, 62, 0.35),
+    rgba(63, 82, 62, 0.35) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+}
+
+.sage-photo-feather {
+  -webkit-mask-image: radial-gradient(
+    ellipse 78% 76% at 50% 50%,
+    #000 34%,
+    rgba(0, 0, 0, 0.72) 58%,
+    rgba(0, 0, 0, 0.2) 80%,
+    transparent 96%
+  );
+  mask-image: radial-gradient(
+    ellipse 78% 76% at 50% 50%,
+    #000 34%,
+    rgba(0, 0, 0, 0.72) 58%,
+    rgba(0, 0, 0, 0.2) 80%,
+    transparent 96%
+  );
+}
+
+.sage-photo-grade {
+  filter: brightness(1.04) saturate(0.68) contrast(0.95) sepia(0.22) hue-rotate(34deg);
+}
+
+.sage-hero-dissolve {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 66%,
+    rgba(0, 0, 0, 0.94) 72%,
+    rgba(0, 0, 0, 0.82) 78%,
+    rgba(0, 0, 0, 0.64) 84%,
+    rgba(0, 0, 0, 0.42) 89%,
+    rgba(0, 0, 0, 0.22) 94%,
+    rgba(0, 0, 0, 0.08) 97%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 66%,
+    rgba(0, 0, 0, 0.94) 72%,
+    rgba(0, 0, 0, 0.82) 78%,
+    rgba(0, 0, 0, 0.64) 84%,
+    rgba(0, 0, 0, 0.42) 89%,
+    rgba(0, 0, 0, 0.22) 94%,
+    rgba(0, 0, 0, 0.08) 97%,
+    transparent 100%
+  );
+}

@@ -1,0 +1,1089 @@
+Use file Koda to make changes for the upcoming prompt. for now only prepare basic UI wireframes, boilerplates, and design scaffolding (up to 50% of the project)
+
+# KODA — AUTONOMOUS CREATOR AGENTS
+## Complete Product Development & Implementation Master Prompt
+
+### 1. YOUR ROLE
+
+Act as a world-class multidisciplinary product development team consisting of:
+
+- Principal Full-Stack Software Architect
+- Senior Frontend Engineer
+- Senior Backend Engineer
+- Creative Director and UI/UX Designer
+- AI/ML Systems Architect
+- Video Processing Engineer
+- Product Manager
+- QA and Testing Engineer
+
+You are responsible for designing, engineering, integrating, and delivering a complete, polished, hackathon-ready web application.
+
+Do not approach this as a tutorial, prototype, static design exercise, or basic CRUD application.
+
+You must build an actual working product with a cohesive user experience, functional interactions, realistic processing workflows, and a modular backend architecture.
+
+---
+
+# 2. PRODUCT OVERVIEW
+
+**Product Name:** Koda  
+**Track:** Autonomous Creator Agents  
+**Product Category:** AI-Powered Autonomous Video Editing and Content Repurposing Studio
+
+### Product Vision
+
+Koda is an autonomous AI co-editor that transforms long-form video content into optimized, platform-ready content assets.
+
+Instead of requiring creators to manually watch hours of footage, identify interesting moments, remove dead air, generate clips, create thumbnails, and optimize metadata, Koda coordinates multiple specialized agents to automate the entire workflow.
+
+The user uploads a video, selects their desired outputs, and hands the project over to Koda.
+
+Koda then orchestrates a multi-agent production pipeline that produces:
+
+1. Cleaned and tightened horizontal video masters.
+2. Automatically identified vertical tension reels.
+3. AI-assisted thumbnail variations.
+4. Visual attention and heatmap analysis.
+5. Semantic SEO titles, descriptions, and tags.
+6. Export-ready content bundles.
+
+### Core Value Proposition
+
+**One video in. An entire content package out.**
+
+The application should demonstrate how autonomous agents can collaborate to perform specialized creative tasks with minimal human intervention.
+
+---
+
+# 3. DEVELOPMENT OBJECTIVE
+
+Build the complete Koda application, not merely its foundational 50%.
+
+The application must have:
+
+- Complete frontend implementation.
+- Complete backend boilerplate.
+- Functional API communication.
+- Fully implemented UI interactions.
+- Realistic mock processing.
+- Working application states.
+- Persistent project data where practical.
+- Simulated autonomous agent orchestration.
+- Export functionality.
+- Responsive layouts.
+- Error handling and loading states.
+- Developer documentation.
+- A polished demonstration experience.
+
+### Important implementation boundary
+
+We are building a complete, demonstrable MVP with a modular architecture prepared for real AI/media integrations.
+
+Do NOT waste time implementing computationally expensive infrastructure that is unnecessary for the hackathon demonstration.
+
+Do NOT implement:
+- Actual Whisper transcription inference.
+- Heavy Gemini Vision processing.
+- Real-time multimodal video inference.
+- Complex FFmpeg rendering pipelines.
+- Expensive external AI API calls without configured credentials.
+
+Instead, implement complete simulated workflows with realistic outputs and explicit integration boundaries.
+
+The application must never falsely represent simulated AI analysis as actual inference.
+
+Every integration boundary must be documented with `TODO` comments.
+
+---
+
+# 4. TECHNOLOGY STACK
+
+Use the following architecture consistently.
+
+## Frontend
+
+- Next.js with App Router.
+- TypeScript.
+- Tailwind CSS.
+- Lucide React icons.
+- Framer Motion for animations.
+- React hooks for application state.
+- Reusable and modular components.
+
+## Backend
+
+- Python 3.11+.
+- FastAPI.
+- Pydantic v2.
+- Uvicorn.
+- CORS middleware.
+- REST API architecture.
+
+## Data and Storage
+
+For the MVP:
+
+- Local development storage.
+- Structured mock project data.
+- Local persistence using browser storage where appropriate.
+- Backend-managed project state.
+- Local asset storage for uploaded demo files where practical.
+
+Keep the architecture ready for future PostgreSQL, object storage, and background job integration.
+
+## Communication
+
+Frontend communicates with FastAPI using REST endpoints.
+
+Use environment variables for API URLs and configuration.
+
+Do not hardcode localhost URLs throughout the application.
+
+---
+
+# 5. DESIGN SYSTEM AND VISUAL IDENTITY
+
+This is one of the most important requirements.
+
+Design Koda as a premium professional post-production studio.
+
+The interface should feel like a combination of a sophisticated video editing environment, an AI orchestration dashboard, and a modern creative workspace.
+
+The design should have the visual sophistication of a premium creative agency website while retaining the functionality of professional editing software.
+
+## Color Palette
+
+Primary canvas: `#0B0D12`
+
+Elevated surfaces: `#141821`
+
+Secondary surfaces: `#191F2B`
+
+Borders: `#1E2433`
+
+Primary text: `#F8FAFC`
+
+Secondary text: `#94A3B8`
+
+Muted text: `#64748B`
+
+Primary AI accent: `#7C3AED` (Electric Violet)
+
+Telemetry accent: `#06B6D4` (Cyan)
+
+Success accent: `#10B981` (Emerald)
+
+Warning accent: `#F59E0B`
+
+Error accent: `#EF4444`
+
+## Typography
+
+Use a refined combination of:
+
+- Inter or Geist for interface typography.
+- Monospace typography for timestamps, technical metrics, scores, and telemetry.
+
+Typography must establish a clear hierarchy.
+
+Use large, expressive headlines where appropriate, balanced against compact technical labels.
+
+## UI Characteristics
+
+- Deep dark backgrounds.
+- Subtle gradients only when purposeful.
+- Fine 1px borders.
+- Carefully controlled shadows.
+- Generous spacing.
+- Rounded but restrained corners.
+- Premium visual hierarchy.
+- Carefully aligned grids.
+- Smooth transitions.
+- Consistent iconography.
+- Subtle glow effects around active AI operations.
+
+Avoid generic dashboard templates.
+
+Avoid excessive glassmorphism.
+
+Avoid oversized rounded cards everywhere.
+
+Avoid repetitive layouts.
+
+Avoid empty sections and excessive decorative elements.
+
+The result should look like an actual commercial creative software product.
+
+---
+
+# 6. APPLICATION ARCHITECTURE
+
+Organize the application into the following primary sections.
+
+## A. Studio Dashboard
+
+The landing workspace should contain:
+
+- Koda branding.
+- Product subtitle: "Your Autonomous Co-Editor".
+- Navigation sidebar.
+- Recent projects.
+- New project action.
+- Agent activity overview.
+- Recent processing history.
+- Quick-start demo action.
+- System status indicator.
+
+The dashboard should feel like a professional creative workspace.
+
+## B. New Project / Ingestion
+
+Create a complete upload experience.
+
+Features:
+
+- Drag-and-drop video upload.
+- File browser selection.
+- Accept `.mp4`, `.mov`, and supported video formats.
+- File name and size display.
+- Upload progress simulation.
+- Video metadata preview where available.
+- Sample demo project loading.
+
+### Content Presets
+
+Provide:
+
+1. Gaming / Esports VOD.
+2. Podcast.
+3. Tech / Educational.
+
+Each preset should adjust relevant mock processing parameters and output suggestions.
+
+### Output Selection
+
+Provide selectable output options:
+
+- Tightened 16:9 Master.
+- 9:16 Tension Reels.
+- A/B Heatmap Thumbnails.
+- Semantic SEO Pack.
+
+Allow users to select multiple outputs.
+
+Primary CTA:
+
+**Hand Off to Koda**
+
+The button must initiate the actual application workflow.
+
+---
+
+# 7. AUTONOMOUS AGENT ORCHESTRATION
+
+This is the core differentiating feature of Koda.
+
+Build a visually engaging multi-agent processing system.
+
+The pipeline must simulate sequential agent execution and provide meaningful state updates.
+
+Implement four specialized agents.
+
+### Agent 01 — Whisper ASR & Dead-Air Stripper
+
+Responsibilities:
+
+- Simulated speech transcription.
+- Timestamp generation.
+- Dead-air detection.
+- Silence segment identification.
+- Transcript segmentation.
+- Suggested removal intervals.
+
+Display:
+
+- Agent status.
+- Processing progress.
+- Current activity.
+- Mock transcript.
+- Removed silence timestamps.
+
+Integration boundary:
+
+`// TODO: Integrate OpenAI Whisper or compatible ASR provider.`
+
+### Agent 02 — Multimodal Vision Tension-Beat Detector
+
+Responsibilities:
+
+- Analyze simulated video segments.
+- Identify high-energy moments.
+- Detect important scene transitions.
+- Generate tension scores.
+- Identify potential short-form clip timestamps.
+
+Display:
+
+- Tension score.
+- Important timestamps.
+- Detected moments.
+- Agent execution status.
+
+Integration boundary:
+
+`// TODO: Integrate Gemini Vision for video understanding and scene analysis.`
+
+### Agent 03 — Automated 9:16 Video Stitcher
+
+Responsibilities:
+
+- Generate simulated vertical reel segments.
+- Produce suggested clip boundaries.
+- Generate crop and framing recommendations.
+- Simulate caption placement.
+- Generate clip metadata.
+
+Display:
+
+- Reel previews.
+- Hook timestamps.
+- Aspect ratio.
+- Caption toggle.
+- Clip duration.
+
+Integration boundary:
+
+`// TODO: Integrate FFmpeg for actual trimming, cropping, rendering, and encoding.`
+
+### Agent 04 — Saliency Heatmap & Thumbnail A/B Critic
+
+Responsibilities:
+
+- Generate three thumbnail variations.
+- Produce simulated visual attention maps.
+- Calculate predicted CTR scores.
+- Compare thumbnail hierarchy.
+- Recommend the strongest variation.
+
+Display:
+
+- Thumbnail variants.
+- Simulated gaze heatmaps.
+- CTR predictions.
+- Visual critique.
+- Winning variant.
+
+Integration boundary:
+
+`// TODO: Integrate Gemini Vision and a suitable visual attention prediction model.`
+
+## Agent Pipeline Behaviour
+
+Implement:
+
+- Sequential execution.
+- Animated progress indicators.
+- Agent status transitions.
+- Processing logs.
+- Completed and failed states.
+- Retry functionality.
+- Manual step advancement for demos.
+- A simulated automatic processing mode.
+
+The pipeline must support a complete end-to-end demo.
+
+Do not use a simple static progress bar pretending to be an agent system.
+
+Each agent must have a distinct state and meaningful simulated outputs.
+
+---
+
+# 8. MULTI-CUT WORKBENCH
+
+After processing, take the user to the main editing workspace.
+
+Use a professional two-column editing layout.
+
+## LEFT: CLEANED HORIZONTAL MASTER
+
+Create a 16:9 video preview area.
+
+Include:
+
+- Video preview.
+- Playback controls.
+- Play/pause interaction.
+- Timeline.
+- Timestamp display.
+- Removed silence markers.
+- Semantic chapter markers.
+
+Sample chapters:
+
+- `00:00 Intro`
+- `02:14 Main Breakdown`
+- `06:45 Climax`
+
+Allow chapter pills to be clicked.
+
+Clicking a chapter should update the selected timestamp.
+
+The timeline should visually distinguish removed silence segments from retained content.
+
+If an actual playable video is available, use it. Otherwise, provide a polished simulated video preview with clearly identified demo media.
+
+## RIGHT: VERTICAL TENSION REELS
+
+Display three 9:16 reel previews.
+
+Each card should contain:
+
+- Clip thumbnail or preview.
+- Clip title.
+- Tension score.
+- Hook timestamp.
+- Duration.
+- Caption toggle.
+- Selected state.
+- Export action.
+
+Sample metrics:
+
+- Reel 01: 96/100 Peak Tension.
+- Reel 02: 91/100 High Engagement.
+- Reel 03: 87/100 Strong Hook.
+
+Provide a caption overlay toggle that visibly changes the preview.
+
+Allow the user to select individual reels.
+
+---
+
+# 9. THUMBNAIL A/B AND VISUAL ATTENTION ARENA
+
+Build a dedicated thumbnail experimentation workspace.
+
+Generate three visually distinct 16:9 thumbnail variations using available local/demo assets or generated design compositions.
+
+Each thumbnail should include:
+
+- Variant identifier.
+- Preview.
+- Predicted CTR.
+- Visual hierarchy analysis.
+- Critique notes.
+- Selection state.
+
+Example:
+
+Variant A — 8.9% predicted CTR.
+
+Variant B — 7.4% predicted CTR.
+
+Variant C — 6.8% predicted CTR.
+
+These are simulated demonstration predictions, not actual measured CTR.
+
+## Attention Heatmap
+
+Implement an interactive switch:
+
+**Toggle Attention Heatmap Overlay**
+
+When activated, display a simulated radial eye-tracking visualization.
+
+Use CSS gradients or SVG overlays to create:
+
+- Red: Highest attention.
+- Yellow: Moderate attention.
+- Green: Lower attention.
+
+The overlay should be positioned over each thumbnail.
+
+Include smooth transitions when switching heatmaps on and off.
+
+## Winner Selection
+
+Automatically identify the highest-scoring variant.
+
+Display:
+
+**AUTO-SELECTED WINNER**
+
+Use an emerald accent.
+
+Allow manual thumbnail selection as well.
+
+The UI must update when the user selects another variant.
+
+---
+
+# 10. SEMANTIC SEO AND EXPORT STUDIO
+
+Build a complete content metadata workspace.
+
+Display generated metadata for different platforms.
+
+Include:
+
+### YouTube
+
+- Optimized title.
+- Video description.
+- Semantic keywords.
+- Hashtags.
+
+### Instagram Reels
+
+- Caption.
+- Hashtags.
+- Short-form description.
+
+### TikTok
+
+- Hook-oriented caption.
+- Searchable keywords.
+- Hashtags.
+
+Provide:
+
+- Editable text fields.
+- Copy-to-clipboard buttons.
+- Clickable semantic tag chips.
+- Character counts.
+- Platform switching.
+
+## Export System
+
+Create a functional export interface.
+
+Include:
+
+- Horizontal master.
+- Vertical reels.
+- Thumbnail variants.
+- SEO metadata.
+- Project metadata.
+
+Implement:
+
+**Download Asset Bundle (.ZIP)**
+
+For the MVP, generate a real downloadable ZIP containing available demo assets and metadata files.
+
+Do not return a fake successful download message.
+
+If video rendering is not implemented, include a README inside the bundle explaining which assets are simulated and which integrations remain pending.
+
+Use a suitable ZIP-generation library.
+
+---
+
+# 11. FUNCTIONALITY AND USER EXPERIENCE
+
+Every visible interaction must have a purpose.
+
+Implement:
+
+- Navigation between application sections.
+- New project creation.
+- Demo project loading.
+- File selection.
+- Drag-and-drop handling.
+- Output selection.
+- Agent execution.
+- Agent step advancement.
+- Pipeline retry.
+- Project switching.
+- Reel selection.
+- Caption toggles.
+- Chapter navigation.
+- Timeline interactions.
+- Heatmap toggles.
+- Thumbnail winner selection.
+- Editable metadata.
+- Copy-to-clipboard.
+- ZIP export.
+- Toast notifications.
+- Loading indicators.
+- Empty states.
+- Error states.
+
+Avoid decorative buttons that do nothing.
+
+Where an operation cannot be implemented without real external infrastructure, provide a functional simulation and explain the limitation within the UI.
+
+---
+
+# 12. BACKEND IMPLEMENTATION
+
+Build a proper FastAPI backend.
+
+Required structure:
+
+`backend/main.py`
+
+`backend/schemas.py`
+
+`backend/requirements.txt`
+
+Create modular backend services where appropriate.
+
+## Required API Endpoints
+
+### Health
+
+`GET /api/health`
+
+Returns backend availability and service status.
+
+### Projects
+
+`GET /api/projects`
+
+Returns all available projects.
+
+`POST /api/projects`
+
+Creates a new project.
+
+`GET /api/projects/{project_id}`
+
+Returns project details.
+
+`DELETE /api/projects/{project_id}`
+
+Deletes a project.
+
+### Upload
+
+`POST /api/upload`
+
+Accepts a video file and returns upload metadata.
+
+Validate file type and size.
+
+### Agent Pipeline
+
+`POST /api/projects/{project_id}/process`
+
+Starts simulated agent processing.
+
+`GET /api/projects/{project_id}/status`
+
+Returns current processing status.
+
+`POST /api/projects/{project_id}/advance`
+
+Advances the pipeline manually for demonstration mode.
+
+### Outputs
+
+`GET /api/projects/{project_id}/outputs`
+
+Returns generated mock outputs.
+
+`GET /api/projects/{project_id}/metadata`
+
+Returns generated SEO metadata.
+
+### Export
+
+`GET /api/projects/{project_id}/export`
+
+Generates and returns a downloadable ZIP asset bundle.
+
+## Backend Requirements
+
+- Pydantic request and response models.
+- Structured JSON responses.
+- Appropriate HTTP status codes.
+- Exception handling.
+- CORS configuration.
+- Input validation.
+- Consistent response formats.
+- Clear service separation.
+- Mock processing services.
+- TODO integration hooks.
+
+Do not put the entire backend implementation into one large function.
+
+Keep the architecture extendable.
+
+---
+
+# 13. DATA ARCHITECTURE
+
+Create structured models for:
+
+- User project.
+- Uploaded media.
+- Processing configuration.
+- Agent.
+- Agent execution state.
+- Transcript segment.
+- Removed silence interval.
+- Semantic chapter.
+- Tension moment.
+- Vertical reel.
+- Thumbnail variant.
+- Attention heatmap.
+- SEO metadata.
+- Export bundle.
+
+Use TypeScript interfaces on the frontend and matching Pydantic models on the backend.
+
+Keep mock data separate from UI components.
+
+Create:
+
+`frontend/src/data/mockProjectData.ts`
+
+Use realistic, interconnected sample data.
+
+The same project should have consistent timestamps, chapter markers, reels, thumbnails, and SEO metadata throughout the experience.
+
+---
+
+# 14. DEMO EXPERIENCE
+
+The demo experience is critical because Koda is being developed for a hackathon.
+
+A judge should be able to understand the product within the first 30 seconds.
+
+Create a prominent:
+
+**Load Sample Demo Data**
+
+button.
+
+On activation:
+
+1. Load a sample gaming/esports project.
+2. Populate the project details.
+3. Display simulated video media.
+4. Show the processing pipeline.
+5. Allow the user to run or advance agents.
+6. Generate the workbench outputs.
+7. Display thumbnail comparisons.
+8. Show SEO metadata.
+9. Allow ZIP export.
+
+The demo must work without API keys or external services.
+
+Provide realistic mock timestamps, logs, metrics, agent outputs, and media previews.
+
+The experience must be repeatable.
+
+---
+
+# 15. RESPONSIVE DESIGN
+
+Design for:
+
+- Large desktop displays.
+- Standard laptops.
+- Tablets.
+- Mobile devices.
+
+The desktop editing workspace should receive the most attention.
+
+On smaller screens:
+
+- Convert multi-column layouts into stacked sections.
+- Keep essential controls accessible.
+- Allow horizontal scrolling for reel previews where appropriate.
+- Ensure no content overflows.
+- Maintain usable navigation.
+
+Do not simply shrink the desktop layout.
+
+---
+
+# 16. CODE QUALITY AND ENGINEERING STANDARDS
+
+Follow these principles:
+
+- Modular architecture.
+- Reusable components.
+- Strong TypeScript typing.
+- Clear naming conventions.
+- Separation of concerns.
+- Minimal unnecessary dependencies.
+- Maintainable state management.
+- No duplicated business logic.
+- No unnecessary giant components.
+- No hardcoded secrets.
+- No fake API responses presented as real inference.
+- No unresolved imports.
+- No broken navigation.
+- No non-functional controls.
+- No placeholder pages where actual pages are required.
+
+Add clear TODO markers wherever future integrations are required.
+
+Ensure all components have sensible loading, success, and error states.
+
+---
+
+# 17. PROJECT DIRECTORY STRUCTURE
+
+Create a clean, organized project structure similar to:
+
+koda/
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   │   ├── layout/
+│   │   │   ├── dashboard/
+│   │   │   ├── ingestion/
+│   │   │   ├── agents/
+│   │   │   ├── workbench/
+│   │   │   ├── thumbnails/
+│   │   │   ├── seo/
+│   │   │   └── shared/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   ├── types/
+│   │   ├── data/
+│   │   └── lib/
+│   ├── public/
+│   ├── package.json
+│   └── .env.example
+│
+├── backend/
+│   ├── main.py
+│   ├── schemas.py
+│   ├── requirements.txt
+│   ├── services/
+│   ├── routers/
+│   ├── storage/
+│   └── .env.example
+│
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── API.md
+│   └── INTEGRATION_ROADMAP.md
+│
+├── .gitignore
+└── README.md
+
+You may adjust the structure when technically justified, but maintain clear separation between frontend, backend, services, data, and reusable components.
+
+---
+
+# 18. TESTING AND VALIDATION
+
+Before declaring the project complete, verify:
+
+### Frontend
+
+- Dependencies install successfully.
+- Development server starts.
+- No TypeScript errors.
+- No broken imports.
+- No major console errors.
+- All pages render.
+- All primary interactions work.
+- Responsive layouts behave correctly.
+
+### Backend
+
+- Dependencies install.
+- FastAPI server starts.
+- Health endpoint works.
+- Project endpoints work.
+- Upload validation works.
+- Pipeline state changes work.
+- Output endpoints return valid data.
+- Export endpoint returns a valid ZIP.
+
+### Integration
+
+- Frontend communicates with backend.
+- Project creation works.
+- Demo data loads.
+- Pipeline transitions work.
+- Workbench reflects processing results.
+- Export downloads successfully.
+
+Fix errors instead of merely reporting them.
+
+Do not declare a feature complete if it has not been tested.
+
+---
+
+# 19. DOCUMENTATION AND RUN INSTRUCTIONS
+
+Provide a comprehensive README containing:
+
+1. Product introduction.
+2. Product features.
+3. Architecture overview.
+4. Technology stack.
+5. Project structure.
+6. Installation instructions.
+7. Environment setup.
+8. Frontend startup instructions.
+9. Backend startup instructions.
+10. API documentation.
+11. Demo workflow.
+12. Current simulation limitations.
+13. Future AI integration instructions.
+
+Make setup as straightforward as possible.
+
+The application should be runnable locally with clearly documented commands.
+
+---
+
+# 20. EXECUTION STRATEGY
+
+Follow this implementation sequence.
+
+### PHASE 1 — PROJECT INITIALIZATION
+
+- Inspect the existing repository.
+- Preserve useful existing code.
+- Initialize the required frontend and backend.
+- Install dependencies.
+- Establish the architecture.
+- Create environment configuration.
+
+### PHASE 2 — DESIGN SYSTEM
+
+- Define colors and typography.
+- Establish spacing and component standards.
+- Create reusable UI components.
+- Implement navigation and application shell.
+- Establish responsive layouts.
+
+### PHASE 3 — FRONTEND DEVELOPMENT
+
+Build every major application section.
+
+Implement the dashboard, ingestion, agent pipeline, workbench, thumbnail arena, and SEO/export studio.
+
+Use realistic media and sample data.
+
+### PHASE 4 — BACKEND DEVELOPMENT
+
+Implement FastAPI routes, schemas, services, mock processing, project state management, upload validation, and ZIP generation.
+
+### PHASE 5 — INTEGRATION
+
+Connect the frontend to the backend.
+
+Ensure project state and pipeline state remain consistent.
+
+### PHASE 6 — DEMO POLISH
+
+Add:
+
+- Smooth animations.
+- Agent activity logs.
+- Realistic telemetry.
+- Interactive previews.
+- Meaningful transitions.
+- Toast feedback.
+- Loading and error states.
+
+### PHASE 7 — TESTING
+
+Run the application.
+
+Test all major user flows.
+
+Fix runtime errors, broken interactions, and integration issues.
+
+### PHASE 8 — FINAL DELIVERY
+
+Provide:
+
+- Complete source code.
+- Working frontend.
+- Working backend.
+- Setup documentation.
+- API documentation.
+- Demo instructions.
+- Known limitations.
+- Future integration roadmap.
+
+---
+
+# 21. IMPORTANT AUTONOMOUS DEVELOPMENT INSTRUCTIONS
+
+Do not stop after generating the project structure.
+
+Do not provide only code snippets when you have access to a development environment.
+
+Do not leave core sections unfinished.
+
+Do not ask me to manually implement missing components.
+
+Do not substitute static screenshots for functional interfaces.
+
+Do not stop after the first successful frontend render.
+
+If you have filesystem and terminal access:
+
+- Create the actual project files.
+- Install dependencies.
+- Run the development servers.
+- Inspect errors.
+- Fix the implementation.
+- Verify the final application.
+
+If a tool or dependency is unavailable, choose a compatible alternative and document the decision.
+
+Make reasonable product decisions independently rather than repeatedly asking for clarification.
+
+Prioritize a coherent, complete, working product over unnecessary complexity.
+
+---
+
+# 22. FINAL ACCEPTANCE CRITERIA
+
+Koda will be considered complete only when:
+
+1. The application launches successfully.
+2. The user can create or load a demo project.
+3. The user can select a content preset.
+4. The user can upload a supported video or use demo media.
+5. The user can choose desired output formats.
+6. The user can hand the project to Koda.
+7. The four-agent pipeline can execute sequentially.
+8. The processing states and logs update correctly.
+9. The cleaned horizontal master workspace is interactive.
+10. Three vertical reel previews are available.
+11. Caption toggles work.
+12. The thumbnail comparison arena is interactive.
+13. The attention heatmap overlay works.
+14. The predicted CTR comparison is displayed.
+15. Winner selection works.
+16. SEO metadata is editable.
+17. Copy-to-clipboard functionality works.
+18. A real demo ZIP can be downloaded.
+19. The frontend and backend communicate correctly.
+20. All major functionality works without external API credentials.
+
+### THE FINAL PRODUCT STANDARD
+
+Koda must feel like a real AI-powered creative production studio, not a student dashboard or a collection of disconnected screens.
+
+Every screen should feel intentional.
+
+Every interaction should have a purpose.
+
+Every agent should communicate meaningful progress.
+
+Every output should connect to the same project.
+
+Every simulated capability should have a clear path toward real implementation.
+
+**Build Koda as a cohesive, polished, hackathon-ready product that can be confidently demonstrated to judges, investors, and potential users.**
+
+Your job is not to describe how Koda could be built.
+
+**Your job is to build Koda.**

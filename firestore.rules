@@ -1,0 +1,183 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Reusable validation primitives
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidId(id) {
+      return id is string &&
+        id.size() >= 1 &&
+        id.size() <= 128 &&
+        id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidUserProfile(data) {
+      return data.keys().hasAll([
+          'uid',
+          'displayName',
+          'email',
+          'authProvider',
+          'createdAt',
+          'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'uid',
+          'displayName',
+          'email',
+          'authProvider',
+          'lastVerifiedAt',
+          'createdAt',
+          'updatedAt'
+        ]) &&
+        isValidId(data.uid) &&
+        data.uid == request.auth.uid &&
+        data.displayName is string &&
+        data.displayName.size() >= 1 &&
+        data.displayName.size() <= 100 &&
+        data.email is string &&
+        data.email.size() >= 3 &&
+        data.email.size() <= 180 &&
+        data.authProvider in ['password', 'google'] &&
+        (!data.keys().hasAny(['lastVerifiedAt']) || data.lastVerifiedAt is timestamp) &&
+        data.createdAt is timestamp &&
+        data.updatedAt is timestamp;
+    }
+
+    function isValidStudioProject(data) {
+      return data.keys().hasAll([
+          'id',
+          'ownerId',
+          'title',
+          'createdAtLabel',
+          'status',
+          'preset',
+          'selectedThumbnailId',
+          'selectedReelId',
+          'projectData',
+          'createdAt',
+          'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'id',
+          'ownerId',
+          'title',
+          'createdAtLabel',
+          'status',
+          'preset',
+          'selectedThumbnailId',
+          'selectedReelId',
+          'projectData',
+          'createdAt',
+          'updatedAt'
+        ]) &&
+        isValidId(data.id) &&
+        isValidId(data.ownerId) &&
+        data.ownerId == request.auth.uid &&
+        data.title is string &&
+        data.title.size() >= 1 &&
+        data.title.size() <= 180 &&
+        data.createdAtLabel is string &&
+        data.createdAtLabel.size() >= 1 &&
+        data.createdAtLabel.size() <= 64 &&
+        data.status in ['draft', 'processing', 'ready'] &&
+        data.preset in ['gaming', 'podcast', 'tech'] &&
+        data.selectedThumbnailId is string &&
+        data.selectedThumbnailId.size() >= 1 &&
+        data.selectedThumbnailId.size() <= 128 &&
+        data.selectedReelId is string &&
+        data.selectedReelId.size() >= 1 &&
+        data.selectedReelId.size() <= 128 &&
+        data.projectData is map &&
+        data.projectData.keys().size() <= 20 &&
+        data.createdAt is timestamp &&
+        data.updatedAt is timestamp;
+    }
+
+    match /users/{userId} {
+      allow get: if isValidId(userId) && isOwner(userId);
+      allow list: if false;
+      allow create: if isValidId(userId) &&
+        isOwner(userId) &&
+        isValidUserProfile(incoming()) &&
+        incoming().uid == userId &&
+        incoming().createdAt == request.time &&
+        incoming().updatedAt == request.time &&
+        (!incoming().keys().hasAny(['lastVerifiedAt']) || incoming().lastVerifiedAt == request.time);
+      allow update: if isValidId(userId) &&
+        isOwner(userId) &&
+        isValidUserProfile(incoming()) &&
+        incoming().uid == existing().uid &&
+        incoming().createdAt == existing().createdAt &&
+        incoming().updatedAt == request.time &&
+        (
+          incoming().diff(existing()).affectedKeys().hasOnly([
+            'displayName',
+            'email',
+            'authProvider',
+            'updatedAt'
+          ]) ||
+          (
+            incoming().lastVerifiedAt == request.time &&
+            incoming().diff(existing()).affectedKeys().hasOnly([
+              'lastVerifiedAt',
+              'updatedAt'
+            ])
+          )
+        );
+      allow delete: if isValidId(userId) && isOwner(userId);
+
+      match /projects/{projectId} {
+        allow get: if isValidId(userId) && isValidId(projectId) && isOwner(userId);
+        allow list: if isValidId(userId) &&
+          isOwner(userId) &&
+          resource.data.ownerId == request.auth.uid;
+        allow create: if isValidId(userId) &&
+          isValidId(projectId) &&
+          isOwner(userId) &&
+          isValidStudioProject(incoming()) &&
+          incoming().id == projectId &&
+          incoming().ownerId == userId &&
+          incoming().createdAt == request.time &&
+          incoming().updatedAt == request.time &&
+          exists(/databases/$(database)/documents/users/$(userId));
+        allow update: if isValidId(userId) &&
+          isValidId(projectId) &&
+          isOwner(userId) &&
+          isValidStudioProject(incoming()) &&
+          incoming().id == existing().id &&
+          incoming().ownerId == existing().ownerId &&
+          incoming().createdAt == existing().createdAt &&
+          incoming().updatedAt == request.time &&
+          incoming().diff(existing()).affectedKeys().hasOnly([
+            'title',
+            'status',
+            'preset',
+            'selectedThumbnailId',
+            'selectedReelId',
+            'projectData',
+            'updatedAt'
+          ]);
+        allow delete: if isValidId(userId) && isValidId(projectId) && isOwner(userId);
+      }
+    }
+  }
+}
